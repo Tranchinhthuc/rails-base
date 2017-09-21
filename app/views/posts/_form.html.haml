@@ -1,0 +1,9 @@
+.form-group
+  .col-sm-9
+    = f.input :content, autofocus: true, required: true, label: false,
+      input_html: { rows: 5, class: 'form-control', placeholder: 'Post...' }
+  .col-sm-3
+    = f.input :language_id, collection: Language.all, label_method: :name, value_method: :id, label: "Post's language", selected: Language.first.id, input_html: { class: 'form-control' }
+    = f.input :desired_language_id, collection: Language.all, label_method: :name, value_method: :id, label: 'Desired language', selected: Language.first.id, input_html: { class: 'form-control' }
+    =# f.input :tag_ids, collection: Tag.all, label_method: :name, value_method: :id, label: 'Tags', selected: 1, input_html: {class: 'form-control'}
+    %input.tagsinput{type: "text", "data-role"=>"tagsinput" }

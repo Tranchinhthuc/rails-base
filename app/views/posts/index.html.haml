@@ -1,0 +1,14 @@
+.row
+  .col-sm-12
+    = simple_form_for(@post, html: {class: 'form-horizontal'}) do |f|
+      = render 'posts/form', f: f
+      .form-group
+        .col-sm-12
+          = f.submit "Submit", class: 'btn btn-primary'
+.row
+  .small-10.small-offset-1.columns
+    - @posts.each.with_index do |post, index|
+      .panel.panel-default
+        .panel-heading
+          =post.user.full_name
+        .panel-body=post.content
