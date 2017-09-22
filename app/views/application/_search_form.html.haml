@@ -1,0 +1,5 @@
+= search_form_for @q, url: posts_path, html: { method: :get, class: 'search-form form-inline' } do |f|
+  .form-group
+    = f.search_field 'content_cont_any', {class: 'form-control'}
+  .form-group
+    = submit_tag 'Search', class: 'btn btn-primary'

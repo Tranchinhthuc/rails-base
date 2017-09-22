@@ -18,6 +18,7 @@ gem 'jquery-turbolinks'
 gem 'bootstrap-sass'
 gem 'bootstrap-datepicker-rails'
 gem 'jquery-rails'
+gem "font-awesome-rails"
 
 source "https://rails-assets.org" do
   gem "rails-assets-jquery-ujs"
@@ -52,6 +53,7 @@ gem "responders"
 gem "rollbar"
 gem "seedbank"
 gem "stackprof"
+gem 'ransack'
 
 group :staging, :production do
   gem "newrelic_rpm"

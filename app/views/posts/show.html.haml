@@ -1,1 +1,46 @@
-show.html.slim
+.row
+  .container
+    .col-sm-12
+      .col-sm-6.origin-side
+        .div
+        .post-body
+          = @post.content
+        %hr
+        .post-header.small
+          %span.post-language
+            %i.fa.fa-flag{"aria-hidden" => "true"}
+            = link_to @post.language.name, posts_path(q: {language_id_eq: @post.language.id})
+          %span.post-author
+            Post by
+            = link_to @post.user.full_name, posts_path(q: {user_id_eq: @post.user.id})
+          |
+          %span.timestamp= "#{time_ago_in_words(@post.created_at)} ago"
+      .col-sm-6.translated-side
+        = simple_form_for([@post, @translated_post], html: {class: 'form-horizontal'}) do |f|
+          .form-group
+            = f.input :content, autofocus: true, required: true, label: false,
+              input_html: { rows: 5, class: 'form-control', placeholder: "Translate to #{@post.desired_language.name} here..." }
+          .form-group
+            = f.submit "Submit", class: 'btn btn-primary'
+.row
+  .col-sm-9
+    %h2 Translated posts
+    - @post.translated_posts.each.with_index do |post, index|
+      .div.post-box
+        .post-header.small
+          %span.post-language
+            %i.fa.fa-flag{"aria-hidden" => "true"}
+            = link_to post.language.name, posts_path(q: {language_id_eq: post.language.id})
+          %span.post-author
+            Post by
+            = link_to post.translator.full_name, posts_path(q: {user_id_eq: post.translator.id})
+          |
+          %span.timestamp= "#{time_ago_in_words(post.created_at)} ago"
+        .post-body
+          = post.content
+
+  .col-sm-3.tags-area
+    %h2 Tags
+    %ul
+      - Tag.all.each do |tag|
+        %li= link_to tag.name, posts_path(q: {tags_id_eq: tag.id})

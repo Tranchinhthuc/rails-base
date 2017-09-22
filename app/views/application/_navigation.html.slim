@@ -9,6 +9,8 @@ nav.navbar.navbar-default
           = active_link_to "Post", posts_path, active: :exclusive, wrap_tag: :li
     ul.nav.navbar-nav.navbar-right
       - if user_signed_in?
+        li
+          button.btn.btn-info.btn-lg data-target="#post-form-modal" data-toggle="modal" type="button" Create Post
         li.dropdown
           a.dropdown-toggle data-toggle="dropdown" href="#"
             = current_user.full_name

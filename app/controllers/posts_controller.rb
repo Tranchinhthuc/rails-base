@@ -1,11 +1,14 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
   def index
-    @posts = Post.all
+    @posts = @q.result.includes(:tags).order(created_at: :desc).page(params[:page])
+    @all_tags = Tag.all
     @post = Post.new
   end
 
   def show
+    @translated_post = TranslatedPost.new
   end
 
   # def new
@@ -42,6 +45,6 @@ class PostsController < ApplicationController
   end
 
   def set_post
-    @post = Post.find(:id)
+    @post = Post.find(params[:id])
   end
 end
