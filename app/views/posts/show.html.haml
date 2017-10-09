@@ -1,12 +1,12 @@
 .row
   .container
-    .col-sm-12
-      .col-sm-6.origin-side
+    .col-sm-12{style: 'border-bottom: 1px solid #ccc;'}
+      .col-sm-6.origin-side{style: 'border-left: 1px solid #ccc;'}
         .div
         .post-body
           = @post.content
         %hr
-        .post-header.small
+        .post-header.small{style: 'margin-top: 50px;'}
           %span.post-language
             %i.fa.fa-flag{"aria-hidden" => "true"}
             = link_to @post.language.name, posts_path(q: {language_id_eq: @post.language.id})
@@ -19,12 +19,12 @@
         = simple_form_for([@post, @translated_post], html: {class: 'form-horizontal'}) do |f|
           .form-group
             = f.input :content, autofocus: true, required: true, label: false,
-              input_html: { rows: 5, class: 'form-control', placeholder: "Translate to #{@post.desired_language.name} here..." }
+              input_html: { rows: 5, class: 'form-control', placeholder: "Translate to #{@post.desired_language.name} here...", style: 'border: none; border-left: 1px solid #ccc; border-radius: 0;' }
           .form-group
             = f.submit "Submit", class: 'btn btn-primary'
 .row
   .col-sm-9
-    %h2 Translated posts
+    %h2="Translated posts(#{@post.translated_posts.count})"
     - @post.translated_posts.each.with_index do |post, index|
       .div.post-box
         .post-header.small

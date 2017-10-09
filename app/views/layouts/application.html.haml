@@ -1,7 +1,7 @@
 !!! 5
 %html
   %head
-    %title RailsBase
+    %title HelpMeTranslate
     %meta{charset: "utf-8"}
     = display_meta_tags site: "RailsBase", keywords: %w(title site)
     = csrf_meta_tags
@@ -14,7 +14,8 @@
       = render 'navigation'
       = render "messages"
       %main.container
-        = render "search_form"
+        .col-md-6.col-md-offset-3
+          = render "search_form"
         = render "post_form"
         = yield
       = render 'footer'
