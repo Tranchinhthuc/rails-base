@@ -30,4 +30,6 @@ class User < ApplicationRecord
 
   has_many :translated_posts, foreign_key: :user_id
   has_many :posts
+  has_many :votes
+  has_many :comments
 end

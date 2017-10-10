@@ -16,12 +16,15 @@
           |
           %span.timestamp= "#{time_ago_in_words(@post.created_at)} ago"
       .col-sm-6.translated-side
-        = simple_form_for([@post, @translated_post], html: {class: 'form-horizontal'}) do |f|
-          .form-group
-            = f.input :content, autofocus: true, required: true, label: false,
-              input_html: { rows: 5, class: 'form-control', placeholder: "Translate to #{@post.desired_language.name} here...", style: 'border: none; border-left: 1px solid #ccc; border-radius: 0;' }
-          .form-group
-            = f.submit "Submit", class: 'btn btn-primary'
+        - if user_signed_in?
+          = simple_form_for([@post, @translated_post], html: {class: 'form-horizontal'}) do |f|
+            .form-group
+              = f.input :content, autofocus: true, required: true, label: false,
+                input_html: { rows: 5, class: 'form-control', placeholder: "Translate to #{@post.desired_language.name} here...", style: 'border: none; border-left: 1px solid #ccc; border-radius: 0;' }
+            .form-group
+              = f.submit "Submit", class: 'btn btn-primary'
+        - else
+          = link_to "Sign in to contribute a translation for this post.", new_user_session_path
 .row
   .col-sm-9
     %h2="Translated posts(#{@post.translated_posts.count})"
@@ -38,7 +41,12 @@
           %span.timestamp= "#{time_ago_in_words(post.created_at)} ago"
         .post-body
           = post.content
-
+          #comment-area
+            - post.comments.each do |comment|
+              .comment-box
+                = comment.content
+          - if user_signed_in?
+            = render 'shared/comment_form', object: post
   .col-sm-3.tags-area
     %h2 Tags
     %ul

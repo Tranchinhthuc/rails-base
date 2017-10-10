@@ -16,6 +16,7 @@ class TranslatedPost < ApplicationRecord
   belongs_to :translator, class_name: 'User'
   belongs_to :post
   belongs_to :language
+  has_many :comments, as: :target
   enum status: {
     enable: 0,
     disable: 1

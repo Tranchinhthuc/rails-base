@@ -16,6 +16,8 @@ class Post < ApplicationRecord
   belongs_to :desired_language, class_name: 'Language', foreign_key: 'desired_language_id'
   has_many :post_tags
   has_many :tags, through: :post_tags
+  has_many :votes
+  has_many :comments, as: :target
 
   validates :content, presence: true
 
