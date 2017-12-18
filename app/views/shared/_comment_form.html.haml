@@ -1,4 +1,0 @@
-= form_for([object, Comment.new], html: {class: 'form-horizontal', id: 'comment-form'}, remote: true) do |f|
-  .form-group
-    = f.text_field :content, autofocus: true, required: true, label: false,
-      class: 'form-control', placeholder: "comment...", style: 'width: 80%; margin-left: 50px;'

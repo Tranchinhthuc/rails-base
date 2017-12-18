@@ -1,28 +1,18 @@
-default: &default
+development: &default
   adapter: mysql2
-  encoding: utf8mb4
-  charset: utf8mb4
-  collation: utf8mb4_general_ci
-  pool: 5
   username: root
-  password:
-  port: 3306
-  host: localhost
-
-development:
-  <<: *default
+  password: Hoang123456
   database: translate_dev
-  username: root
-  password:
+  encoding: utf8mb4
 
 test:
   <<: *default
   database: translate_test
-  username: root
-  password:
+  encoding: utf8mb4
 
 production:
   <<: *default
-  database: translate_pro
-  username: root
-  password:
+  database: translate_production
+  encoding: utf8mb4
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
